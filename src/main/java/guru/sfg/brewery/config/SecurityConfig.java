@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -77,26 +76,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        return new InMemoryUserDetailsManager(admin, user);
 //    }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("spring")
-                //.password("{noop}guru")
-                //.password("guru")
-                .password("{bcrypt}$2a$10$2I78PQi/u1Yk88mvJB3ukOoKaFi.DjE4AtRz2bCE8cHiS39Lop45S") // with PasswordEncoderFactories.createDelegatingPasswordEncoder()
-                .roles("ADMIN")
-                .and()
-                .withUser("user")
-                //.password("{noop}password")
-                //.password("password")
-                //.password("{SSHA}P2onGgiVITqwP1o1xzSaXmfxpN5qUHGXP9JI5w==")
-                //.password("aee54173b1610c4b26d193b2eea2913465e06a8e672284536ec6c12c2c02405c1ac4fa55cba6bb8f")
-                //.password("$2a$10$ypOdJYHo7o6aXYmJyaVQFuzSI6u3nXoxxeTYwgurn0OAceFKzTssq")
-                .password("{sha256}9d6289b9846e5fb663e4745ab88d7e1e1a91ac5b9ad850eed8260b47da33340731c969f84a59b80a") //// with PasswordEncoderFactories.createDelegatingPasswordEncoder()
-                .roles("USER");
 
-        auth.inMemoryAuthentication()
-                //.withUser("scott").password("{noop}tiger").roles("CUSTOMER");
-        .withUser("scott").password("{bcrypt10}$2a$10$HFNEzs06yqzQ8JhC7FKtmuFaAQV2wLgR.z54W9hb5Jy.YYIUaaVuq").roles("CUSTOMER");
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("spring")
+//                //.password("{noop}guru")
+//                //.password("guru")
+//                .password("{bcrypt}$2a$10$2I78PQi/u1Yk88mvJB3ukOoKaFi.DjE4AtRz2bCE8cHiS39Lop45S") // with PasswordEncoderFactories.createDelegatingPasswordEncoder()
+//                .roles("ADMIN")
+//                .and()
+//                .withUser("user")
+//                //.password("{noop}password")
+//                //.password("password")
+//                //.password("{SSHA}P2onGgiVITqwP1o1xzSaXmfxpN5qUHGXP9JI5w==")
+//                //.password("aee54173b1610c4b26d193b2eea2913465e06a8e672284536ec6c12c2c02405c1ac4fa55cba6bb8f")
+//                //.password("$2a$10$ypOdJYHo7o6aXYmJyaVQFuzSI6u3nXoxxeTYwgurn0OAceFKzTssq")
+//                .password("{sha256}9d6289b9846e5fb663e4745ab88d7e1e1a91ac5b9ad850eed8260b47da33340731c969f84a59b80a") //// with PasswordEncoderFactories.createDelegatingPasswordEncoder()
+//                .roles("USER");
+//
+//        auth.inMemoryAuthentication()
+//                //.withUser("scott").password("{noop}tiger").roles("CUSTOMER");
+//        .withUser("scott").password("{bcrypt10}$2a$10$HFNEzs06yqzQ8JhC7FKtmuFaAQV2wLgR.z54W9hb5Jy.YYIUaaVuq").roles("CUSTOMER");
+//    }
 }
