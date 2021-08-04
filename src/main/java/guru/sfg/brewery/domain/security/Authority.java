@@ -19,5 +19,6 @@ public class Authority {
     private String permission;
 
     @ManyToMany(mappedBy = "authorities")
+    //@ManyToMany(mappedBy = "authorities", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     private Set<Role> roles;
 }
