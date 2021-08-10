@@ -100,6 +100,8 @@ public class DefaultBreweryLoader implements CommandLineRunner {
         createOrder(stPeteCustomer);
         createOrder(dunedinCustomer);
         createOrder(keyWestCustomer);
+
+        log.debug("Orders Loaded: " + beerOrderRepository.count());
     }
 
     private BeerOrder createOrder(Customer customer) {
