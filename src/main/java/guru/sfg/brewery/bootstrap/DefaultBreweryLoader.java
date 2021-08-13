@@ -50,6 +50,10 @@ public class DefaultBreweryLoader implements CommandLineRunner {
     public static final String DUNEDIN_DISTRIBUTING = "Dunedin Distributing";
     public static final String KEY_WEST_DISTRIBUTORS = "Key West Distributors";
 
+    public static final String STPETE_USER = "stpete";
+    public static final String DUNEDIN_USER = "dunedin";
+    public static final String KEYWEST_USER = "keywest";
+
     public static final String BEER_1_UPC = "0631234200036";
     public static final String BEER_2_UPC = "0631234300019";
     public static final String BEER_3_UPC = "0083783375213";
@@ -229,25 +233,27 @@ public class DefaultBreweryLoader implements CommandLineRunner {
         Authority readOrder = authorityRepository.save(Authority.builder().permission("order.read").build());
         Authority updateOrder = authorityRepository.save(Authority.builder().permission("order.update").build());
         Authority deleteOrder = authorityRepository.save(Authority.builder().permission("order.delete").build());
+        Authority pickupOrder = authorityRepository.save(Authority.builder().permission("order.pickup").build());
 
         // beer order for customer
         Authority createOrderCustomer = authorityRepository.save(Authority.builder().permission("customer.order.create").build());
         Authority readOrderCustomer = authorityRepository.save(Authority.builder().permission("customer.order.read").build());
         Authority updateOrderCustomer = authorityRepository.save(Authority.builder().permission("customer.order.update").build());
         Authority deleteOrderCustomer = authorityRepository.save(Authority.builder().permission("customer.order.delete").build());
+        Authority pickupOrderCustomer = authorityRepository.save(Authority.builder().permission("customer.order.pickup").build());
 
         Role adminRole = roleRepository.save(Role.builder().name("ADMIN").build());
         Role customerRole = roleRepository.save(Role.builder().name("CUSTOMER").build());
         Role userRole = roleRepository.save(Role.builder().name("USER").build());
 
         adminRole.setAuthorities(new HashSet<>(Set.of(createBeer, updateBeer, readBeer, deleteBeer, createCustomer, readCustomer, updateCustomer, deleteCustomer,
-                createBrewery, readBrewery, updateBrewery, deleteBrewery, createOrder, readOrder, updateOrder, deleteOrder)));
+                createBrewery, readBrewery, updateBrewery, deleteBrewery, createOrder, readOrder, updateOrder, deleteOrder, pickupOrder)));
 
 //        adminRole.setAuthorities(Set.of(createBeer, updateBeer, readBeer, deleteBeer, createCustomer, readCustomer, updateCustomer, deleteCustomer,
 //                createBrewery, readBrewery, updateBrewery, deleteBrewery));
 
         customerRole.setAuthorities(new HashSet<>(Set.of(readBeer, readCustomer, readBrewery,
-                createOrderCustomer, readOrderCustomer, updateOrderCustomer, deleteOrderCustomer)));
+                createOrderCustomer, readOrderCustomer, updateOrderCustomer, deleteOrderCustomer, pickupOrderCustomer)));
 //        customerRole.setAuthorities(Set.of(readBeer, readCustomer, readBrewery));
 
         userRole.setAuthorities(new HashSet<>(Set.of(readBeer)));
