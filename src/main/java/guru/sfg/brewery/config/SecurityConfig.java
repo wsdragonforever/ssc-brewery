@@ -17,13 +17,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@RequiredArgsConstructor
+@RequiredArgsConstructor //@RequiredArgsConstructor will create constructor and spring will do the dependency injection
 @Configuration
 @EnableWebSecurity
 // @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true) // securedEnabled = true => method level security, prePostEnabled = true => @PreAuthorize("hasRole('ADMIN')")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    //@RequiredArgsConstructor will create constructor and spring will do the dependency injection
     private final UserDetailsService userDetailsService;
     private final PersistentTokenRepository persistentTokenRepository;
 
