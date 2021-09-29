@@ -37,7 +37,7 @@ public class UserController {
         return "user/register2fa";
     }
 
-    @PostMapping
+    @PostMapping("/register2fa")
     public String confirm2Fa(@RequestParam Integer verifyCode) { // if the variable name is the same, Spring will automatically bind that property in register2fa.html
         User user = getUser();
 
@@ -45,13 +45,29 @@ public class UserController {
 
         if (googleAuthenticator.authorizeUser(user.getUsername(), verifyCode)) {
             User savedUser = userRepository.findById(user.getId()).orElseThrow();
-            savedUser.setUserGoogle2Fa(true);
+            savedUser.setUseGoogle2fa(true);
             userRepository.save(savedUser);
 
             return "/index";
         } else {
             // bad code
             return "user/register2fa";
+        }
+    }
+
+    @GetMapping("/verify2fa")
+    public String verify2fa() {
+        return "user/verify2fa";
+    }
+    @PostMapping("/verify2fa")
+    public String verifyPostOf2Fa(@RequestParam Integer verifyCode) {
+        User user = getUser();
+        if (googleAuthenticator.authorizeUser(user.getUsername(), verifyCode)) {
+            ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).setGoogle2FaRequired(false);
+
+            return "/index";
+        } else {
+            return "user/verify2fa";
         }
     }
 
