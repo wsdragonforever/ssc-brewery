@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@CrossOrigin // CORS for this controller only
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/")
@@ -127,6 +128,7 @@ public class BeerRestController {
 
     //@PreAuthorize("hasRole('ADMIN')")
     //@PreAuthorize("hasAuthority('beer.delete')")
+//    @CrossOrigin
     @BeerDeletePermission
     @DeleteMapping({"beer/{beerId}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)

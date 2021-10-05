@@ -1,18 +1,13 @@
 package guru.sfg.brewery.config;
 
 import guru.sfg.brewery.security.RestHeaderAuthFilter;
-import guru.sfg.brewery.security.SfgPasswordEncoderFactories;
 import guru.sfg.brewery.security.google.Google2faFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -20,10 +15,10 @@ import org.springframework.security.web.session.SessionManagementFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @RequiredArgsConstructor //@RequiredArgsConstructor will create constructor and spring will do the dependency injection
-@Configuration
-@EnableWebSecurity
-// @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true) // securedEnabled = true => method level security, prePostEnabled = true => @PreAuthorize("hasRole('ADMIN')")
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@Configuration
+//@EnableWebSecurity
+//// @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true) // securedEnabled = true => method level security, prePostEnabled = true => @PreAuthorize("hasRole('ADMIN')")
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //@RequiredArgsConstructor will create constructor and spring will do the dependency injection
@@ -43,15 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new SecurityEvaluationContextExtension();
     }
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        //return NoOpPasswordEncoder.getInstance();
-        //return new LdapShaPasswordEncoder();
-//        return new StandardPasswordEncoder();
-        //return new BCryptPasswordEncoder();
-        //return PasswordEncoderFactories.createDelegatingPasswordEncoder(); // new on Spring 5
-        return SfgPasswordEncoderFactories.createDelegatingPasswordEncoder(); // new on Spring 5
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

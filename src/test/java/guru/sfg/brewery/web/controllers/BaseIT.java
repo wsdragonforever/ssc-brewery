@@ -9,8 +9,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.stream.Stream;
 
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-
 public abstract class BaseIT {
     @Autowired
     WebApplicationContext wac;
@@ -34,7 +32,9 @@ public abstract class BaseIT {
 
     @BeforeEach
     public void setup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(wac).apply(springSecurity()).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac)
+//                .apply(springSecurity())
+                .build();
     }
 
     public static Stream<Arguments> getStreamAdminCustomer() {
